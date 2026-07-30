@@ -4,272 +4,283 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>XBZ_MUSEOD</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f5f7fa;--white:#fff;--border:#e8ecf0;--text:#1a1a2e;--text2:#64748b;--text3:#94a3b8;--blue:#2563eb;--green:#16a34a;--red:#dc2626;--orange:#ea580c;--purple:#7c3aed;--r:10px;--r2:14px;--r3:20px;--shadow2:0 4px 16px rgba(0,0,0,0.08)}
+:root{--bg:#0f172a;--bg2:#1e293b;--card:#1e293b;--border:#334155;--text:#f1f5f9;--text2:#94a3b8;--text3:#64748b;--accent:#06b6d4;--accent2:#22d3ee;--accentbg:rgba(6,182,212,0.1);--green:#10b981;--greenbg:rgba(16,185,129,0.1);--red:#ef4444;--redbg:rgba(239,68,68,0.1);--orange:#f59e0b;--orangebg:rgba(245,158,11,0.1);--purple:#a855f7;--r:12px;--r2:16px;--r3:24px;--shadow:0 8px 32px rgba(0,0,0,0.3)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-a{text-decoration:none;color:var(--blue)}
-button{font-family:inherit;cursor:pointer}
-input,select{font-family:inherit}
+body{font-family:'Vazirmatn',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+a{text-decoration:none;color:var(--accent)}button{font-family:inherit;cursor:pointer}input,select{font-family:inherit}
 
-/* Login */
-.login-bg{display:flex;align-items:center;justify-content:center;min-height:100vh}
-.login-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r3);padding:48px 40px;width:400px;max-width:92vw;text-align:center;box-shadow:var(--shadow2)}
-.login-icon{width:72px;height:72px;margin:0 auto 20px;background:rgba(37,99,235,0.08);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:2em}
-.login-card h1{font-size:1.4em;font-weight:700;margin-bottom:6px}
+/* === LOGIN === */
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;background:radial-gradient(ellipse at top,rgba(6,182,212,0.08),transparent 60%)}
+.login-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r3);padding:44px 36px;width:420px;max-width:94vw;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.login-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--purple),var(--accent))}
+.login-glow{width:80px;height:80px;margin:0 auto 24px;background:var(--accentbg);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:2.2em;border:2px solid rgba(6,182,212,0.2)}
+.login-card h1{font-size:1.5em;font-weight:800;margin-bottom:6px}
 .login-card .sub{color:var(--text2);font-size:0.88em;margin-bottom:28px}
-.field{margin-bottom:14px;text-align:right}
-.field label{display:block;color:var(--text2);font-size:0.8em;font-weight:600;margin-bottom:5px}
-.field input,.field select{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--r);background:var(--white);font-size:0.88em;transition:0.2s}
-.field input:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px rgba(37,99,235,0.1)}
-.btn{width:100%;padding:13px;border:none;border-radius:var(--r);font-size:0.92em;font-weight:700;transition:0.15s}
-.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:#1d4ed8}
-.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#15803d}
-.err{color:var(--red);font-size:0.85em;background:rgba(220,38,38,0.08);padding:12px;border-radius:var(--r);margin-bottom:14px}
+.inp{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--r);background:var(--bg);color:var(--text);font-size:0.9em;transition:0.2s;margin-bottom:14px;text-align:right}
+.inp:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(6,182,212,0.15)}
+.inp::placeholder{color:var(--text3)}
+.btn{width:100%;padding:14px;border:none;border-radius:var(--r);font-size:0.95em;font-weight:700;transition:0.2s;cursor:pointer}
+.btn-accent{background:linear-gradient(135deg,var(--accent),#0891b2);color:#fff}.btn-accent:hover{box-shadow:0 8px 24px rgba(6,182,212,0.3);transform:translateY(-1px)}
+.btn-green{background:linear-gradient(135deg,var(--green),#059669);color:#fff}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--text2)}.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.err{color:var(--red);font-size:0.85em;background:var(--redbg);padding:12px;border-radius:var(--r);margin-bottom:14px}
+.login-foot{margin-top:24px;color:var(--text3);font-size:0.72em}
 
-/* Topbar */
-.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px;display:flex;justify-content:space-between;align-items:center;height:56px;position:sticky;top:0;z-index:50}
-.topbar .brand{display:flex;align-items:center;gap:10px}
-.topbar .brand h2{font-size:1.1em;font-weight:700}
-.topbar .brand span{color:var(--blue)}
-.topbar .links{display:flex;gap:4px}
-.topbar .links a,.topbar .links button{color:var(--text2);padding:8px 12px;border-radius:var(--r);font-size:0.83em;font-weight:600;background:none;border:none}
+/* === TOPBAR === */
+.topbar{background:var(--card);border-bottom:1px solid var(--border);padding:0 24px;display:flex;justify-content:space-between;align-items:center;height:60px;position:sticky;top:0;z-index:50;backdrop-filter:blur(10px)}
+.topbar .brand{display:flex;align-items:center;gap:12px}
+.topbar .brand .icon{width:36px;height:36px;background:var(--accentbg);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1em}
+.topbar .brand h2{font-size:1.05em;font-weight:800}
+.topbar .brand span{color:var(--accent);font-weight:900}
+.topbar .brand .ver{color:var(--text3);font-size:0.65em;background:var(--bg);padding:3px 8px;border-radius:8px;border:1px solid var(--border);font-weight:600}
+.topbar .links{display:flex;gap:6px}
+.topbar .links a,.topbar .links button{color:var(--text3);padding:8px 14px;border-radius:var(--r);font-size:0.8em;font-weight:600;background:none;border:none;transition:0.15s}
 .topbar .links a:hover,.topbar .links button:hover{background:var(--bg);color:var(--text)}
 
-/* Dashboard */
-.ct{max-width:900px;margin:24px auto;padding:0 20px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
-.stat{background:var(--white);border:1px solid var(--border);border-radius:var(--r2);padding:18px;display:flex;align-items:center;gap:14px}
-.stat .ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2em}
-.stat .ico.p{background:rgba(124,58,237,0.08);color:var(--purple)}
-.stat .ico.b{background:rgba(37,99,235,0.08);color:var(--blue)}
-.stat .ico.g{background:rgba(22,163,74,0.08);color:var(--green)}
-.stat .n{font-size:1.3em;font-weight:800}
-.stat .lb{color:var(--text3);font-size:0.78em;font-weight:600}
-.sec{background:var(--white);border:1px solid var(--border);border-radius:var(--r3);padding:20px;margin-bottom:20px}
-.sec-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px;flex-wrap:wrap}
-.btn-sm{padding:9px 18px;border:none;border-radius:var(--r);font-size:0.83em;font-weight:600;display:inline-flex;align-items:center;gap:6px}
-.btn-primary{background:var(--blue);color:#fff}
-.btn-refresh{background:var(--bg);color:var(--text2);border:1px solid var(--border)}
+/* === MAIN === */
+.ct{max-width:960px;margin:28px auto;padding:0 20px}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.st{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:20px;text-align:center;transition:0.2s;position:relative;overflow:hidden}
+.st:hover{border-color:var(--accent);transform:translateY(-2px)}
+.st::after{content:'';position:absolute;top:0;right:0;left:0;height:2px;background:var(--accent);opacity:0;transition:0.2s}
+.st:hover::after{opacity:1}
+.st .num{font-size:1.8em;font-weight:900;line-height:1.2}
+.st .num.c-accent{color:var(--accent)}.st .num.c-green{color:var(--green)}.st .num.c-purple{color:var(--purple)}.st .num.c-orange{color:var(--orange)}
+.st .lb{color:var(--text3);font-size:0.78em;font-weight:600;margin-top:4px}
+
+/* Section */
+.sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r3);padding:24px;margin-bottom:24px}
+.sec-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:12px;flex-wrap:wrap}
+.sec-h h3{font-size:1em;font-weight:800;display:flex;align-items:center;gap:8px}
+.sec-h h3 .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.btn-sm{padding:9px 18px;border:none;border-radius:var(--r);font-size:0.82em;font-weight:700;display:inline-flex;align-items:center;gap:6px;transition:0.15s}
+.btn-sm:hover{transform:translateY(-1px)}
 .search{flex:1;min-width:180px}
-.search input{width:100%;padding:9px 14px;border:1.5px solid var(--border);border-radius:var(--r);font-size:0.85em}
+.search input{width:100%;padding:10px 16px;border:1.5px solid var(--border);border-radius:var(--r);font-size:0.85em;background:var(--bg);color:var(--text)}
+.search input:focus{border-color:var(--accent);outline:none}
 
 /* Table */
 table{width:100%;border-collapse:collapse}
-thead th{padding:10px 12px;text-align:right;font-size:0.73em;font-weight:700;color:var(--text3);border-bottom:2px solid var(--border);text-transform:uppercase;letter-spacing:0.3px}
-tbody td{padding:12px;font-size:0.86em;border-bottom:1px solid var(--border)}
-tbody tr:hover{background:rgba(37,99,235,0.02)}
-.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;font-size:0.73em;font-weight:600}
-.bg{background:rgba(22,163,74,0.08);color:var(--green)}
-.br{background:rgba(220,38,38,0.08);color:var(--red)}
-.bp{background:rgba(37,99,235,0.08);color:var(--blue)}
-.user-name{font-weight:700}
-.uuid{font-family:monospace;font-size:0.72em;color:var(--text3);direction:ltr}
-.trf{font-size:0.82em;color:var(--text2);direction:ltr}
-.prog{height:6px;background:var(--bg);border-radius:3px;overflow:hidden;margin-top:5px;width:100px}
-.prog-fill{height:100%;border-radius:3px}
-.pf-g{background:var(--green)}.pf-b{background:var(--blue)}.pf-r{background:var(--red)}
-.btn-s{padding:5px 10px;border:none;border-radius:8px;font-size:0.78em;font-weight:600}
-.bs{background:rgba(37,99,235,0.08);color:var(--blue)}
-.bw{background:rgba(234,88,12,0.08);color:var(--orange)}
-.bd{background:rgba(220,38,38,0.08);color:var(--red)}
-.bgrp{display:flex;gap:4px}
+thead th{padding:12px 14px;text-align:right;font-size:0.72em;font-weight:700;color:var(--text3);border-bottom:2px solid var(--border);text-transform:uppercase;letter-spacing:0.5px}
+tbody td{padding:14px;font-size:0.85em;border-bottom:1px solid var(--border)}
+tbody tr{transition:0.15s}
+tbody tr:hover{background:rgba(6,182,212,0.03)}
+.uname{font-weight:700;font-size:0.92em}.uuid{font-size:0.7em;color:var(--text3);direction:ltr;font-family:monospace;margin-top:2px}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:5px 14px;border-radius:20px;font-size:0.72em;font-weight:700}
+.b-accent{background:var(--accentbg);color:var(--accent)}.b-green{background:var(--greenbg);color:var(--green)}.b-red{background:var(--redbg);color:var(--red)}.b-purple{background:rgba(168,85,247,0.1);color:var(--purple)}
+.trf{font-size:0.8em;color:var(--text2);direction:ltr;font-family:monospace}
+.prog{height:6px;background:var(--bg);border-radius:3px;overflow:hidden;margin-top:6px;width:110px}
+.prog-fill{height:100%;border-radius:3px;transition:width 0.3s}
+.bgrp{display:flex;gap:5px}
+.btn-s{padding:6px 12px;border:none;border-radius:8px;font-size:0.78em;font-weight:600;transition:0.15s}
+.btn-s:hover{transform:scale(1.05)}
+.bs{background:var(--accentbg);color:var(--accent)}.bw{background:var(--orangebg);color:var(--orange)}.bd{background:var(--redbg);color:var(--red)}
 
 /* Modal */
-.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
 .mo.show{display:flex}
-.md{background:var(--white);border-radius:var(--r3);padding:28px;width:520px;max-width:94vw;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow2)}
-.md-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.md-h h3{font-size:1.05em;font-weight:700}
-.md-x{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:var(--white);font-size:1em}
-.fr{display:flex;gap:8px;flex-wrap:wrap}.fr>.field{flex:1;min-width:120px}
+.md{background:var(--card);border:1px solid var(--border);border-radius:var(--r3);padding:32px;width:540px;max-width:94vw;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow)}
+.md-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.md-h h3{font-size:1.1em;font-weight:800}
+.md-x{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);background:var(--bg);color:var(--text3);font-size:1em;transition:0.15s}
+.md-x:hover{background:var(--redbg);color:var(--red);border-color:var(--red)}
+.field{margin-bottom:16px;text-align:right}
+.field label{display:block;color:var(--text3);font-size:0.78em;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px}
+.field input,.field select{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--r);background:var(--bg);color:var(--text);font-size:0.88em;transition:0.2s}
+.field input:focus,.field select:focus{border-color:var(--accent);outline:none}
+.fr{display:flex;gap:10px;flex-wrap:wrap}.fr>.field{flex:1;min-width:130px}
 
 /* Toast */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:12px 24px;border-radius:var(--r);font-size:0.88em;display:none;z-index:200}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:14px 28px;border-radius:var(--r);font-size:0.9em;font-weight:700;display:none;z-index:200;box-shadow:0 8px 24px rgba(6,182,212,0.3)}
 
-@media(max-width:600px){.stats{grid-template-columns:1fr}table{font-size:0.8em}td,th{padding:8px 6px!important}}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}table{font-size:0.78em}td,th{padding:10px 8px!important}}
 </style>
 </head>
 <body>
 
-<!-- LOGIN PAGE -->
-<div id="loginPage" class="login-bg">
+<!-- LOGIN -->
+<div id="loginPage" class="login-wrap">
 <div class="login-card">
-<div class="login-icon">⚡</div>
-<h1>وارد حساب خود شوید</h1>
-<div class="sub">خوش آمدید، لطفا اطلاعات خود را وارد کنید</div>
+<div class="login-glow">⚡</div>
+<h1>ورود به پنل</h1>
+<div class="sub">خوش آمدید، اطلاعات خود را وارد کنید</div>
 <div id="loginErr" class="err" style="display:none"></div>
-<input id="loginUser" placeholder="نام کاربری" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--r);font-size:0.88em;margin-bottom:12px" autocomplete="username">
-<input id="loginPass" type="password" placeholder="گذرواژه" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--r);font-size:0.88em;margin-bottom:18px" autocomplete="current-password">
-<button class="btn btn-blue" onclick="doLogin()">🚪 ورود</button>
-<div style="margin-top:20px;color:var(--text3);font-size:0.72em">XBZ_MUSEOD v2.0.0 — ساخته شده با ❤️</div>
+<input id="loginUser" class="inp" placeholder="نام کاربری" autocomplete="username">
+<input id="loginPass" class="inp" type="password" placeholder="گذرواژه" autocomplete="current-password">
+<button class="btn btn-accent" onclick="doLogin()">⚡ ورود</button>
+<div class="login-foot">XBZ_MUSEOD v2.0.1</div>
 </div>
 </div>
 
 <!-- DASHBOARD -->
 <div id="dashPage" style="display:none">
 <div class="topbar">
-<div class="brand"><h2>⚡ <span>XBZ_MUSEOD</span></h2></div>
+<div class="brand">
+<div class="icon">⚡</div>
+<h2><span>XBZ_MUSEOD</span></h2>
+<span class="ver">v2.0.1</span>
+</div>
 <div class="links">
 <button onclick="location.reload()">🔄</button>
-<button onclick="window.open('/sub/'+prompt('UUID:'),'_blank')">📋 ساب</button>
+<button onclick="dlExport()">📦 خروجی</button>
+<button onclick="doLogout()">🚪 خروج</button>
 </div>
 </div>
+
 <div class="ct">
 <div class="stats">
-<div class="stat"><div class="ico p">👥</div><div><div class="n" id="sActive">0</div><div class="lb">کاربران فعال</div></div></div>
-<div class="stat"><div class="ico b">📊</div><div><div class="n" id="sTraffic">0 GB</div><div class="lb">مصرف کل</div></div></div>
-<div class="stat"><div class="ico g">📡</div><div><div class="n" id="sUsers">0</div><div class="lb">کل کاربران</div></div></div>
+<div class="st"><div class="num c-accent" id="sTotal">0</div><div class="lb">کل کاربران</div></div>
+<div class="st"><div class="num c-green" id="sActive">0</div><div class="lb">فعال</div></div>
+<div class="st"><div class="num c-purple" id="sTraffic">0</div><div class="lb">مصرف (GB)</div></div>
+<div class="st"><div class="num c-orange" id="sExpired">0</div><div class="lb">منقضی</div></div>
 </div>
 
 <div class="sec">
-<div class="sec-top">
-<button class="btn-sm btn-primary" onclick="showM('addM')">➕ افزودن کاربر</button>
-<button class="btn-sm btn-primary" onclick="showM('batchM')" style="background:var(--green)">👥 ساخت گروهی</button>
+<div class="sec-h">
+<div style="display:flex;gap:8px">
+<button class="btn-sm btn-accent" onclick="showM('addM')">➕ کاربر جدید</button>
+<button class="btn-sm btn-green" onclick="showM('batchM')">👥 ساخت گروهی</button>
+</div>
 <div class="search"><input id="searchInput" placeholder="🔍 جستجو..." oninput="filterUsers()"></div>
 </div>
 <table>
-<thead><tr><th>کاربر</th><th>پروتکل</th><th>وضعیت</th><th>مصرف</th><th>عملیات</th></tr></thead>
+<thead><tr><th>کاربر</th><th>پروتکل</th><th>وضعیت</th><th>مصرف داده</th><th>عملیات</th></tr></thead>
 <tbody id="userTable"></tbody>
 </table>
 </div>
 </div></div>
 
-<!-- ADD USER MODAL -->
-<div class="mo" id="addM">
-<div class="md">
-<div class="md-h"><h3>👤 افزودن کاربر</h3><button class="md-x" onclick="hideM('addM')">✕</button></div>
+<!-- ADD USER -->
+<div class="mo" id="addM"><div class="md">
+<div class="md-h"><h3>➕ افزودن کاربر</h3><button class="md-x" onclick="hideM('addM')">✕</button></div>
 <div class="field"><label>نام کاربری</label><input id="a-email" placeholder="مثلاً user-01"></div>
 <div class="fr"><div class="field"><label>پروتکل</label><select id="a-proto"><option value="vless">VLESS</option><option value="vmess">VMess</option><option value="trojan">Trojan</option></select></div>
 <div class="field"><label>شبکه</label><select id="a-net"><option value="ws">WebSocket</option><option value="grpc">gRPC</option><option value="tcp">TCP</option></select></div></div>
 <div class="fr"><div class="field"><label>دامنه سرور</label><input id="a-domain" placeholder="domain.com"></div>
 <div class="field"><label>پورت</label><input id="a-port" type="number" value="443"></div></div>
-<div class="fr"><div class="field"><label>SNI</label><input id="a-sni" placeholder="SNI (اختیاری)"></div>
+<div class="fr"><div class="field"><label>SNI</label><input id="a-sni" placeholder="اختیاری"></div>
 <div class="field"><label>امنیت</label><select id="a-sec"><option value="none">None</option><option value="tls">TLS</option></select></div></div>
 <div class="fr"><div class="field"><label>حد مصرف (GB)</label><input id="a-total" type="number" value="5"></div>
 <div class="field"><label>تاریخ پایان (روز)</label><input id="a-expiry" type="number" value="30"></div></div>
-<button class="btn btn-blue" onclick="addUser()" style="margin-top:10px">افزودن کاربر</button>
+<button class="btn btn-accent" onclick="addUser()" style="margin-top:8px">افزودن کاربر</button>
 </div></div>
 
-<!-- BATCH MODAL -->
-<div class="mo" id="batchM">
-<div class="md">
+<!-- BATCH -->
+<div class="mo" id="batchM"><div class="md">
 <div class="md-h"><h3>👥 ساخت گروهی</h3><button class="md-x" onclick="hideM('batchM')">✕</button></div>
-<div class="field"><label>پیشوند نام</label><input id="b-prefix" value="user" placeholder="user"></div>
+<div class="field"><label>پیشوند نام</label><input id="b-prefix" value="user"></div>
 <div class="fr"><div class="field"><label>تعداد</label><input id="b-count" type="number" value="5" min="1" max="50"></div>
 <div class="field"><label>پروتکل</label><select id="b-proto"><option value="vless">VLESS</option><option value="vmess">VMess</option><option value="trojan">Trojan</option></select></div></div>
-<div class="fr"><div class="field"><label>دامنه سرور</label><input id="b-domain" placeholder="domain.com"></div>
+<div class="fr"><div class="field"><label>دامنه</label><input id="b-domain" placeholder="domain.com"></div>
 <div class="field"><label>پورت</label><input id="b-port" type="number" value="443"></div></div>
 <div class="fr"><div class="field"><label>SNI</label><input id="b-sni" placeholder="SNI"></div>
 <div class="field"><label>امنیت</label><select id="b-sec"><option value="none">None</option><option value="tls">TLS</option></select></div></div>
 <div class="fr"><div class="field"><label>حد مصرف (GB)</label><input id="b-total" type="number" value="5"></div>
 <div class="field"><label>تاریخ پایان (روز)</label><input id="b-expiry" type="number" value="30"></div></div>
-<button class="btn btn-green" onclick="batchAdd()" style="margin-top:10px">ساخت گروهی</button>
+<button class="btn btn-green" onclick="batchAdd()" style="margin-top:8px">ساخت گروهی</button>
 </div></div>
 
-<!-- USER INFO MODAL -->
-<div class="mo" id="infoM">
-<div class="md">
-<div class="md-h"><h3>📋 لینک کاربر</h3><button class="md-x" onclick="hideM('infoM')">✕</button></div>
+<!-- INFO -->
+<div class="mo" id="infoM"><div class="md">
+<div class="md-h"><h3>📋 اطلاعات کاربر</h3><button class="md-x" onclick="hideM('infoM')">✕</button></div>
 <div id="infoContent"></div>
 </div></div>
 
-<div class="toast" id="toast">✅ انجام شد!</div>
+<div class="toast" id="toast">✅</div>
 
 <script>
 let loggedIn=false;
-
-function api(url,body){return fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:body?JSON.stringify(body):undefined}).then(r=>r.json())}
-function apiGet(url){return fetch(url).then(r=>r.json())}
-
-function doLogin(){
-    api("/api/login",{username:document.getElementById("loginUser").value,password:document.getElementById("loginPass").value}).then(d=>{
-        if(d.ok){loggedIn=true;document.getElementById("loginPage").style.display="none";document.getElementById("dashPage").style.display="block";loadUsers()}
-        else{var e=document.getElementById("loginErr");e.textContent=d.error;e.style.display="block"}
-    }).catch(()=>{var e=document.getElementById("loginErr");e.textContent="خطا در اتصال";e.style.display="block"})
-}
-document.addEventListener("keydown",e=>{if(e.key==="Enter"&&!loggedIn)doLogin()})
-
+function api(u,b){return fetch(u,{method:"POST",headers:{"Content-Type":"application/json"},body:b?JSON.stringify(b):undefined}).then(r=>r.json())}
+function apiG(u){return fetch(u).then(r=>r.json())}
 function showM(id){document.getElementById(id).classList.add("show")}
 function hideM(id){document.getElementById(id).classList.remove("show")}
+function toast(m){var t=document.getElementById("toast");t.textContent=m||"✅";t.style.display="block";setTimeout(()=>t.style.display="none",2500)}
 
-function toast(m){var t=document.getElementById("toast");t.textContent=m||"✅ انجام شد!";t.style.display="block";setTimeout(()=>t.style.display="none",2000)}
+function doLogin(){
+  api("/api/login",{username:document.getElementById("loginUser").value,password:document.getElementById("loginPass").value}).then(d=>{
+    if(d.ok){loggedIn=true;document.getElementById("loginPage").style.display="none";document.getElementById("dashPage").style.display="block";loadUsers()}
+    else{var e=document.getElementById("loginErr");e.textContent=d.error;e.style.display="block"}
+  }).catch(()=>{document.getElementById("loginErr").textContent="خطا";document.getElementById("loginErr").style.display="block"})
+}
+function doLogout(){loggedIn=false;document.getElementById("dashPage").style.display="none";document.getElementById("loginPage").style.display="flex"}
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&!loggedIn)doLogin()})
 
 function loadUsers(){
-    apiGet("/api/users").then(users=>{
-        let active=0,totalTraffic=0;
-        users.forEach(u=>{if(u.enable)active++;totalTraffic+=u.total_used});
-        document.getElementById("sActive").textContent=active;
-        document.getElementById("sTraffic").textContent=(totalTraffic/1073741824).toFixed(1)+" GB";
-        document.getElementById("sUsers").textContent=users.length;
-        let tb=document.getElementById("userTable");tb.innerHTML="";
-        users.forEach(u=>{
-            let pct=u.usage_pct;let cls=pct>80?"pf-r":pct>50?"pf-b":"pf-g";
-            tb.innerHTML+=`<tr class="urow" data-name="${u.email}">
-            <td><div class="user-name">${u.email}</div><div class="uuid">${u.uuid.substring(0,16)}...</div></td>
-            <td><span class="badge bp">${u.protocol.toUpperCase()}</span></td>
-            <td>${u.enable?'<span class="badge bg">🟢 فعال</span>':'<span class="badge br">🔴 غیرفعال</span>'}</td>
-            <td><span class="trf">${u.used_str} / ${u.total_str}</span>
-            ${u.total?`<div class="prog"><div class="prog-fill ${cls}" style="width:${pct}%"></div></div>`:''}</td>
-            <td><div class="bgrp">
-            <button class="btn-s bs" onclick='showLink(${JSON.stringify(u).replace(/'/g,"&#39;")})' title="لینک">🔗</button>
-            <button class="btn-s bw" onclick="toggleU(${u.id})">🔄</button>
-            <button class="btn-s bd" onclick="delU(${u.id})">🗑️</button>
-            </div></td></tr>`;
-        });
+  apiG("/api/users").then(users=>{
+    let active=0,expired=0,traffic=0,now=Date.now()/1000;
+    users.forEach(u=>{if(u.enable)active++;traffic+=u.total_used;if(u.expiry&&u.expiry>0&&u.expiry+new Date(u.created_at).getTime()/1000<now)expired++});
+    document.getElementById("sTotal").textContent=users.length;
+    document.getElementById("sActive").textContent=active;
+    document.getElementById("sTraffic").textContent=(traffic/1073741824).toFixed(1);
+    document.getElementById("sExpired").textContent=expired;
+    let tb=document.getElementById("userTable");tb.innerHTML="";
+    users.forEach(u=>{
+      let pct=u.usage_pct;let cls=pct>80?"background:var(--red)":pct>50?"background:var(--orange)":"background:var(--accent)";
+      tb.innerHTML+=`<tr class="urow" data-name="${u.email}">
+      <td><div class="uname">${u.email}</div><div class="uuid">${u.uuid.substring(0,20)}...</div></td>
+      <td><span class="badge b-accent">${u.protocol.toUpperCase()}</span></td>
+      <td>${u.enable?'<span class="badge b-green">🟢 فعال</span>':'<span class="badge b-red">🔴 غیرفعال</span>'}</td>
+      <td><span class="trf">${u.used_str} / ${u.total_str}</span>
+      ${u.total?`<div class="prog"><div class="prog-fill" style="width:${pct}%;${cls}"></div></div>`:''}</td>
+      <td><div class="bgrp">
+      <button class="btn-s bs" onclick='showInfo(${JSON.stringify(u).replace(/'/g,"&#39;")})'>📋</button>
+      <button class="btn-s bw" onclick="toggleU(${u.id})">🔄</button>
+      <button class="btn-s bd" onclick="delU(${u.id})">🗑️</button>
+      </div></td></tr>`;
     });
+  });
 }
 
 function addUser(){
-    api("/api/users/add",{email:document.getElementById("a-email").value,protocol:document.getElementById("a-proto").value,
-        domain:document.getElementById("a-domain").value,port:document.getElementById("a-port").value,
-        sni:document.getElementById("a-sni").value,network:document.getElementById("a-net").value,
-        security:document.getElementById("a-sec").value,path:"/ws",
-        total:document.getElementById("a-total").value,expiry:document.getElementById("a-expiry").value
-    }).then(d=>{if(d.ok){hideM("addM");toast("✅ کاربر اضافه شد!");loadUsers()}});
+  api("/api/users/add",{email:document.getElementById("a-email").value,protocol:document.getElementById("a-proto").value,
+    domain:document.getElementById("a-domain").value,port:document.getElementById("a-port").value,
+    sni:document.getElementById("a-sni").value,network:document.getElementById("a-net").value,
+    security:document.getElementById("a-sec").value,path:"/ws",
+    total:document.getElementById("a-total").value,expiry:document.getElementById("a-expiry").value
+  }).then(d=>{if(d.ok){hideM("addM");toast("✅ کاربر اضافه شد!");loadUsers()}});
 }
-
 function batchAdd(){
-    api("/api/users/batch",{prefix:document.getElementById("b-prefix").value,
-        count:document.getElementById("b-count").value,protocol:document.getElementById("b-proto").value,
-        domain:document.getElementById("b-domain").value,port:document.getElementById("b-port").value,
-        sni:document.getElementById("b-sni").value,network:"ws",security:document.getElementById("b-sec").value,
-        path:"/ws",total:document.getElementById("b-total").value,expiry:document.getElementById("b-expiry").value
-    }).then(d=>{if(d.ok){hideM("batchM");toast(`✅ ${d.count} کاربر ساخته شد!`);loadUsers()}});
+  api("/api/users/batch",{prefix:document.getElementById("b-prefix").value,
+    count:document.getElementById("b-count").value,protocol:document.getElementById("b-proto").value,
+    domain:document.getElementById("b-domain").value,port:document.getElementById("b-port").value,
+    sni:document.getElementById("b-sni").value,network:"ws",security:document.getElementById("b-sec").value,
+    path:"/ws",total:document.getElementById("b-total").value,expiry:document.getElementById("b-expiry").value
+  }).then(d=>{if(d.ok){hideM("batchM");toast(`✅ ${d.count} کاربر ساخته شد!`);loadUsers()}});
 }
-
 function delU(id){if(confirm("حذف شود؟"))api("/api/users/delete/"+id).then(()=>{toast("🗑️ حذف شد!");loadUsers()})}
-function toggleU(id){api("/api/users/toggle/"+id).then(()=>{toast("🔄 وضعیت تغییر کرد!");loadUsers()})}
+function toggleU(id){api("/api/users/toggle/"+id).then(()=>{toast("🔄 تغییر کرد!");loadUsers()})}
+function dlExport(){window.open("/api/export","_blank")}
 
-function showLink(u){
-    let subUrl=location.origin+"/sub/"+u.uuid;
-    let info=`<div style="margin-bottom:14px"><strong>نام:</strong> ${u.email}</div>
-    <div style="margin-bottom:14px"><strong>UUID:</strong> <code style="direction:ltr">${u.uuid}</code></div>
-    <div style="margin-bottom:14px"><strong>پروتکل:</strong> ${u.protocol.toUpperCase()}</div>
-    <div style="margin-bottom:14px"><strong>وضعیت:</strong> ${u.enable?'🟢 فعال':'🔴 غیرفعال'}</div>
-    <div style="margin-bottom:14px"><strong>مصرف:</strong> ${u.used_str} / ${u.total_str}</div>
-    <hr style="margin:16px 0;border:none;border-top:1px solid var(--border)">
-    <div style="margin-bottom:10px"><strong>📋 لینک اشتراک:</strong></div>
-    <div style="background:var(--bg);padding:12px;border-radius:var(--r);word-break:break-all;font-size:0.8em;direction:ltr;margin-bottom:14px">${subUrl}</div>
-    <button class="btn btn-blue" onclick="navigator.clipboard.writeText('${subUrl}').then(()=>toast('📋 کپی شد!'))" style="margin-bottom:12px">📋 کپی لینک اشتراک</button>
-    <div style="margin-bottom:10px"><strong>🔗 لینک VPN:</strong></div>
-    <div style="background:var(--bg);padding:12px;border-radius:var(--r);word-break:break-all;font-size:0.75em;direction:ltr;margin-bottom:14px">${u.link}</div>
-    <button class="btn btn-blue" onclick="navigator.clipboard.writeText('${u.link.replace(/'/g,"\\'")}').then(()=>toast('📋 کپی شد!'))">📋 کپی لینک VPN</button>
-    <div style="margin-top:16px;padding:12px;background:rgba(37,99,235,0.06);border-radius:var(--r);font-size:0.8em">
-    <strong>💡 آموزش استفاده:</strong><br>
-    ۱. لینک اشتراک رو کپی کن<br>
-    ۲. توی v2rayNG → اشتراک → Paste کن<br>
-    ۳. یا توی Hiddify → لینک اشتراک → اضافه کن
-    </div>`;
-    document.getElementById("infoContent").innerHTML=info;
-    showM("infoM");
+function showInfo(u){
+  let subUrl=location.origin+"/sub/"+u.uuid;
+  let c=`<div style="display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:0.88em;margin-bottom:20px">
+  <span style="color:var(--text3);font-weight:700">نام:</span><span>${u.email}</span>
+  <span style="color:var(--text3);font-weight:700">UUID:</span><span style="direction:ltr;font-family:monospace;font-size:0.85em">${u.uuid}</span>
+  <span style="color:var(--text3);font-weight:700">پروتکل:</span><span><span class="badge b-accent">${u.protocol.toUpperCase()}</span></span>
+  <span style="color:var(--text3);font-weight:700">وضعیت:</span><span>${u.enable?'🟢 فعال':'🔴 غیرفعال'}</span>
+  <span style="color:var(--text3);font-weight:700">مصرف:</span><span class="trf">${u.used_str} / ${u.total_str}</span>
+  </div>
+  <div style="margin-bottom:12px"><strong style="color:var(--accent)">📋 لینک اشتراک:</strong></div>
+  <div style="background:var(--bg);padding:14px;border-radius:var(--r);word-break:break-all;font-size:0.78em;direction:ltr;margin-bottom:12px;border:1px solid var(--border)">${subUrl}</div>
+  <button class="btn btn-accent" onclick="navigator.clipboard.writeText('${subUrl}').then(()=>toast('📋 کپی شد!'))" style="margin-bottom:16px">📋 کپی لینک اشتراک</button>
+  <div style="margin-bottom:12px"><strong style="color:var(--accent)">🔗 لینک VPN:</strong></div>
+  <div style="background:var(--bg);padding:14px;border-radius:var(--r);word-break:break-all;font-size:0.72em;direction:ltr;margin-bottom:12px;border:1px solid var(--border)">${u.link}</div>
+  <button class="btn btn-accent" onclick="navigator.clipboard.writeText('${u.link.replace(/'/g,"\\'")}').then(()=>toast('📋 کپی شد!'))" style="margin-bottom:20px">📋 کپی لینک VPN</button>
+  <div style="padding:16px;background:var(--accentbg);border-radius:var(--r);font-size:0.82em;border:1px solid rgba(6,182,212,0.15)">
+  <strong>💡 آموزش استفاده:</strong><br>
+  ۱. لینک اشتراک رو کپی کن<br>
+  ۲. توی v2rayNG → اشتراک → Paste کن<br>
+  ۳. یا توی Hiddify → لینک اشتراک → اضافه کن
+  </div>`;
+  document.getElementById("infoContent").innerHTML=c;
+  showM("infoM");
 }
 
-function filterUsers(){
-    let q=document.getElementById("searchInput").value.toLowerCase();
-    document.querySelectorAll(".urow").forEach(r=>{r.style.display=r.dataset.name.toLowerCase().includes(q)?"":"none"});
-}
+function filterUsers(){let q=document.getElementById("searchInput").value.toLowerCase();document.querySelectorAll(".urow").forEach(r=>{r.style.display=r.dataset.name.toLowerCase().includes(q)?"":"none"})}
 </script>
 </body>
 </html>

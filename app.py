@@ -4,7 +4,7 @@ from datetime import datetime
 
 app = Flask(__name__, static_folder="static")
 DB = "xbz.db"
-VERSION = "2.0.0"
+VERSION = "2.0.1"
 
 def init_db():
     c = sqlite3.connect(DB)
