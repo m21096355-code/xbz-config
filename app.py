@@ -4,6 +4,7 @@ from datetime import datetime
 
 app = Flask(__name__, static_folder="static")
 DB = "xbz.db"
+VERSION = "2.0.0"
 
 def init_db():
     c = sqlite3.connect(DB)
@@ -169,7 +170,7 @@ def subscription(token):
         "Content-Type": "text/plain; charset=utf-8",
         "Content-Disposition": f'attachment; filename="{u["email"]}.txt"',
         "Profile-Update-Interval": "12",
-        "Profile-Title": "XBZ PRO",
+        "Profile-Title": "XBZ_MUSEOD",
         "Subscription-Userinfo": f"upload={u['up']};download={u['down']};total={u['total']};expire={exp}"
     }
     return Response(link, headers=headers)
