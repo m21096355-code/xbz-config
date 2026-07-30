@@ -4,7 +4,7 @@ from datetime import datetime
 
 app = Flask(__name__, static_folder="static")
 DB = "xbz.db"
-VERSION = "2.0.5"
+VERSION = "2.0.6"
 
 def init_db():
     c = sqlite3.connect(DB)
@@ -135,10 +135,30 @@ def api_batch():
     db.commit(); db.close()
     return jsonify({"ok": True, "count": len(created), "users": created})
 
+@app.route("/api/users/duplicate/<int:uid>", methods=["POST"])
+def api_duplicate_user(uid):
+    db = get_db()
+    u = db.execute("SELECT * FROM users WHERE id=?", (uid,)).fetchone()
+    if not u: db.close(); return jsonify({"error":"not found"}), 404
+    u = dict(u); new_uuid = str(uuid.uuid4()); new_email = u["email"] + "-copy"
+    db.execute("""INSERT INTO users (email,uuid,protocol,domain,port,sni,network,security,path,total,expiry,comment)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""",
+        (new_email, new_uuid, u["protocol"], u["domain"], u["port"], u["sni"],
+         u["network"], u["security"], u["path"], u["total"], u["expiry"], u["comment"]))
+    db.commit(); db.close()
+    return jsonify({"ok": True, "uuid": new_uuid, "email": new_email})
+
 @app.route("/api/users/delete-all", methods=["POST"])
 def api_delete_all():
     db = get_db(); db.execute("DELETE FROM users"); db.commit(); db.close()
     return jsonify({"ok": True})
+
+@app.route("/api/users/search")
+def api_search_users():
+    q = request.args.get("q", "").lower()
+    db = get_db(); users = [enrich(r) for r in db.execute("SELECT * FROM users ORDER BY id DESC").fetchall()]; db.close()
+    if q: users = [u for u in users if q in u["email"].lower() or q in u["uuid"].lower()]
+    return jsonify(users)
 
 @app.route("/api/stats")
 def api_stats():

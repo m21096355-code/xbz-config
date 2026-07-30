@@ -160,13 +160,13 @@ tbody tr:hover{background:rgba(124,58,237,0.03)}
 <div class="login-card">
 <div class="login-glow">⚡</div>
 <h1>XBZ_MUSEOD</h1>
-<div class="ver">v 2.0.5</div>
+<div class="ver">v 2.0.6</div>
 <div class="sub">پنل مدیریت VPN | Enterprise VPN Manager</div>
 <div id="loginErr" class="err" style="display:none"></div>
 <input id="loginUser" class="inp" placeholder="نام کاربری" autocomplete="username">
 <input id="loginPass" class="inp" type="password" placeholder="گذرواژه" autocomplete="current-password">
 <button class="btn btn-accent" onclick="doLogin()">⚡ ورود به پنل</button>
-<div class="login-foot">XBZ_MUSEOD v 2.0.5 | ساخته شده با ❤️</div>
+<div class="login-foot">XBZ_MUSEOD v 2.0.6 | ساخته شده با ❤️</div>
 </div>
 </div>
 
@@ -192,7 +192,7 @@ tbody tr:hover{background:rgba(124,58,237,0.03)}
 <div class="nav-item" onclick="showTab('trash')"><span class="ic">🗑️</span>سطل زباله</div>
 <div class="nav-item" onclick="doLogout()" style="color:var(--red)"><span class="ic">🚪</span>خروج</div>
 </nav>
-<div class="sidebar-foot">XBZ_MUSEOD v 2.0.5</div>
+<div class="sidebar-foot">XBZ_MUSEOD v 2.0.6</div>
 </div>
 
 <div class="main">
@@ -236,7 +236,7 @@ tbody tr:hover{background:rgba(124,58,237,0.03)}
 <div class="ms"><div class="num" id="msTraffic">0 GB</div><div class="lb">ترافیک</div></div>
 <div class="ms"><div class="num" id="msUsers">0</div><div class="lb">کاربران</div></div>
 <div class="ms"><div class="num">EU West</div><div class="lb">سرور</div></div>
-<div class="ms"><div class="num">v 2.0.5</div><div class="lb">ورژن</div></div>
+<div class="ms"><div class="num">v 2.0.6</div><div class="lb">ورژن</div></div>
 </div></div>
 </div>
 
@@ -380,6 +380,7 @@ function addUser(){api("/api/users/add",{email:$("a-email").value,protocol:$("a-
 function batchAdd(){api("/api/users/batch",{prefix:$("b-prefix").value,count:$("b-count").value,protocol:$("b-proto").value,domain:$("b-domain").value,port:$("b-port").value,sni:$("b-sni").value,network:"ws",security:$("b-sec").value,path:"/ws",total:$("b-total").value,expiry:$("b-expiry").value}).then(d=>{if(d.ok){hideM("batchM");toast(`✅ ${d.count} کاربر ساخته شد!`);loadUsers()}})}
 function delU(id){if(confirm("حذف شود؟"))api("/api/users/delete/"+id).then(()=>{toast("🗑️ حذف شد!");loadUsers()})}
 function toggleU(id){api("/api/users/toggle/"+id).then(()=>{toast("🔄 تغییر کرد!");loadUsers()})}
+function dupU(id){api("/api/users/duplicate/"+id).then(d=>{if(d.ok){toast("📋 کپی شد!");loadUsers()}})}
 function dlExport(){window.open("/api/export","_blank")}
 function deleteAll(){if(confirm("⚠️ همه کاربران حذف شوند؟"))api("/api/users/delete-all").then(()=>{toast("🗑️ همه حذف شدند!");loadUsers()})}
 
@@ -390,7 +391,7 @@ function importData(){try{let d=JSON.parse($("importData").value);api("/api/impo
 
 function checkSub(){let uuid=$("subUuid").value;if(!uuid)return;apiG("/sub/"+uuid+"/info").then(d=>{if(d.error){$("subResult").innerHTML='<div style="color:var(--red)">❌ یافت نشد</div>'}else{$("subResult").innerHTML=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px"><div style="display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:0.88em"><span style="color:var(--text3);font-weight:700">نام:</span><span>${d.email}</span><span style="color:var(--text3);font-weight:700">وضعیت:</span><span>${d.enable?'🟢 فعال':'🔴 غیرفعال'}</span><span style="color:var(--text3);font-weight:700">پروتکل:</span><span class="badge b-accent">${d.protocol.toUpperCase()}</span><span style="color:var(--text3);font-weight:700">مصرف:</span><span class="trf">${(d.up+d.down)/1073741824:.2f} GB / ${d.total?(d.total/1073741824):'∞'} GB</span><span style="color:var(--text3);font-weight:700">انقضا:</span><span>${d.expiry_str}</span></div><div style="margin-top:16px;padding:12px;background:var(--accentbg);border-radius:var(--r);font-size:0.82em"><strong>📋 لینک اشتراک:</strong><br><code style="direction:ltr">${location.origin}/sub/${d.uuid}</code></div><button class="btn btn-accent" onclick="navigator.clipboard.writeText('${location.origin}/sub/${d.uuid}').then(()=>toast('📋 کپی شد!'))" style="margin-top:12px;width:auto;padding:10px 24px">📋 کپی لینک اشتراک</button></div>`}}).catch(()=>{$("subResult").innerHTML='<div style="color:var(--red)">❌ خطا</div>'}}
 
-function loadReports(){let html='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">';allUsers.forEach(u=>{let pct=u.usage_pct;html+=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-weight:700">${u.email}</span><span class="badge ${u.enable?'b-green':'b-red'}">${u.enable?'فعال':'غیرفعال'}</span></div><div class="trf" style="margin-bottom:6px">${u.used_str} / ${u.total_str}</div><div class="prog" style="width:100%"><div class="prog-fill" style="width:${pct}%;background:${pct>80?'var(--red)':pct>50?'var(--orange)':'var(--accent)'}"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px;font-size:0.72em;color:var(--text3)"><span>⬆️ ${u.up_str}</span><span>⬇️ ${u.down_str}</span><span>${u.expiry_str}</span></div></div>`});html+='</div>$("reportContent").innerHTML=html}
+function loadReports(){let html='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">';allUsers.forEach(u=>{let pct=u.usage_pct;html+=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-weight:700">${u.email}</span><span class="badge ${u.enable?'b-green':'b-red'}">${u.enable?'فعال':'غیرفعال'}</span></div><div class="trf" style="margin-bottom:6px">${u.used_str} / ${u.total_str}</div><div class="prog" style="width:100%"><div class="prog-fill" style="width:${pct}%;background:${pct>80?'var(--red)':pct>50?'var(--orange)':'var(--accent)'}"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px;font-size:0.72em;color:var(--text3)"><span>⬆️ ${u.up_str}</span><span>⬇️ ${u.down_str}</span><span>${u.expiry_str}</span></div></div>`});html+='</div>';$("reportContent").innerHTML=html}
 
 function loadSettings(){let domain=localStorage.getItem("xbz-domain")||"your-domain.com";let port=localStorage.getItem("xbz-port")||"443";$("set-domain").value=domain;$("set-port").value=port;$("subLinks").innerHTML=`ساب: <span style="color:var(--accent)">${domain}:${port}/sub/{UUID}</span>\nصفحه: <span style="color:var(--accent)">${domain}:${port}/share/{UUID}</span>\nاطلاعات: <span style="color:var(--accent)">${domain}:${port}/sub/{UUID}/info</span>\n\nسازگار با: v2rayNG · Hiddify · Nekobox · V2Box · Streisand · V2rayN`}
 function saveSettings(){localStorage.setItem("xbz-domain",$("set-domain").value);localStorage.setItem("xbz-port",$("set-port").value);toast("✅ ذخیره شد!");loadSettings()}
@@ -399,7 +400,7 @@ function testApi(){apiG($("api-url").value).then(d=>$("apiResult").textContent=J
 
 function showInfo(u){let sub=location.origin+"/sub/"+u.uuid;let c=`<div style="display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:0.86em;margin-bottom:20px"><span style="color:var(--text3);font-weight:700">نام:</span><span style="font-weight:700">${u.email}</span><span style="color:var(--text3);font-weight:700">UUID:</span><span style="direction:ltr;font-family:monospace;font-size:0.82em">${u.uuid}</span><span style="color:var(--text3);font-weight:700">پروتکل:</span><span class="badge b-accent">${u.protocol.toUpperCase()}</span><span style="color:var(--text3);font-weight:700">وضعیت:</span><span>${u.enable?'🟢 فعال':'🔴 غیرفعال'}</span><span style="color:var(--text3);font-weight:700">مصرف:</span><span class="trf">${u.used_str}/${u.total_str}</span><span style="color:var(--text3);font-weight:700">انقضا:</span><span>${u.expiry_str}</span></div><div style="margin-bottom:10px;font-weight:800;color:var(--accent)">📋 لینک اشتراک</div><div style="background:var(--bg);padding:12px;border-radius:var(--r);word-break:break-all;font-size:0.72em;direction:ltr;margin-bottom:10px;border:1px solid var(--border)">${sub}</div><button class="btn btn-accent" onclick="navigator.clipboard.writeText('${sub}').then(()=>toast('📋 کپی شد!'))" style="margin-bottom:16px;width:auto;padding:10px 24px">📋 کپی لینک اشتراک</button><div style="margin-bottom:10px;font-weight:800;color:var(--pink)">🔗 لینک VPN</div><div style="background:var(--bg);padding:12px;border-radius:var(--r);word-break:break-all;font-size:0.68em;direction:ltr;margin-bottom:10px;border:1px solid var(--border)">${u.link}</div><button class="btn btn-accent" onclick="navigator.clipboard.writeText('${u.link.replace(/'/g,"\\'")}').then(()=>toast('📋 کپی شد!'))" style="width:auto;padding:10px 24px">📋 کپی لینک VPN</button><div style="padding:14px;background:var(--accentbg);border-radius:var(--r);font-size:0.8em;border:1px solid rgba(124,58,237,0.15);margin-top:16px"><strong>💡 آموزش:</strong> لینک اشتراک → v2rayNG/Hiddify → اشتراک → Paste</div>`;$("infoContent").innerHTML=c;showM("infoM")}
 
-function globalFilter(){let q=$("globalSearch").value.toLowerCase();let filtered=allUsers.filter(u=>u.email.toLowerCase().includes(q)||u.uuid.toLowerCase().includes(q));renderUsers(filtered)}
+function globalFilter(){let q=$("globalSearch").value.toLowerCase();if(!q){renderUsers(allUsers);return}let filtered=allUsers.filter(u=>u.email.toLowerCase().includes(q)||u.uuid.toLowerCase().includes(q));renderUsers(filtered)}
 </script>
 </body>
 </html>
